@@ -30,8 +30,8 @@ namespace DaggerfallWorkshop.Game.Questing.Actions
 
         public override string Pattern
         {
-            get { return @"customprompt (?<id>\d+) (?<buttons>[a-zA-Z]+ [a-zA-Z0-9_.]+){2,}|" +
-                         @"customprompt (?<idName>\w+) (?<buttons>[a-zA-Z]+ [a-zA-Z0-9_.]+){2,}"; }
+            get { return @"customprompt (?<id>\d+) (?<buttons>[a-zA-Z0-9]+ [a-zA-Z0-9_.]+){2,}|" +
+                         @"customprompt (?<idName>\w+) (?<buttons>[a-zA-Z0-9]+ [a-zA-Z0-9_.]+){2,}"; }
         }
 
         public CustomPrompt(Quest parentQuest)
