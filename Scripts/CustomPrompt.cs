@@ -30,8 +30,8 @@ namespace DaggerfallWorkshop.Game.Questing.Actions
 
         public override string Pattern
         {
-            get { return @"customprompt (?<id>\d+) (?<buttons>[a-zA-Z0-9]+ [a-zA-Z0-9_.]+){2,}|" +
-                         @"customprompt (?<idName>\w+) (?<buttons>[a-zA-Z0-9]+ [a-zA-Z0-9_.]+){2,}"; }
+            get { return @"customprompt (?<id>\d+)(?:\s(?<buttons>[a-zA-Z0-9._]+\s[a-zA-Z0-9_.]+)){2,}|" +
+                         @"customprompt (?<idName>\w+)(?:\s(?<buttons>[a-zA-Z0-9._]+\s[a-zA-Z0-9_.]+)){2,}"; }
         }
 
         public CustomPrompt(Quest parentQuest)
@@ -50,9 +50,9 @@ namespace DaggerfallWorkshop.Game.Questing.Actions
             // Factory new prompt
             CustomPrompt prompt = new CustomPrompt(parentQuest);
             prompt.id = Parser.ParseInt(match.Groups["id"].Value);
-
+            Debug.Log(match.Groups["buttons"].ToString());
             string[] promptButtons = match.Groups["buttons"].Value.Split(' ');
-
+            Debug.Log(promptButtons.ToString());
             for(int i = 0; i < promptButtons.Length; i = i + 2) {
                 buttonKeys[i] = promptButtons[i];
                 buttons.Add(promptButtons[i], new Symbol(promptButtons[i + 1]));

@@ -48,6 +48,9 @@ QBN:
 
 --	Quest start-up:
 	say 1020
+	-- customprompt (\d+)(?:\s([a-zA-Z0-9._]+\s[a-zA-Z0-9_.]+)){2,}
+	-- customprompt (?<id>\d+)(?:\s(?<buttons>[a-zA-Z0-9]+ [a-zA-Z0-9_.]+){2,})
+	-- customprompt (?<id>\d+)(?:\s(?<buttons>\w+\s\w+)){2,}
 	customprompt 1000 BUTTON1 _task1_ BUTTON2 _task2_
 
 _task1_ task:
