@@ -1,0 +1,18 @@
+{
+    "ModTitle": "Custom Prompt Demo",
+    "ModVersion": "0.1",
+    "ModAuthor": "BadLuckBurt",
+    "ContactInfo": "x",
+    "DFUnity_Version": "0.10.22",
+    "ModDescription": "Quest to test custom prompt parsing",
+    "GUID": "1356fbb9-b409-4c83-9fc0-d088baef7849",
+    "Files": [
+        "Assets/Game/Mods/blb-quest-custombuttons/BLB_Custom_Prompt_Demo.cs",
+        "Assets/Game/Mods/blb-quest-custombuttons/blb-quest-custombuttons.dfmod.json",
+        "Assets/Game/Mods/blb-quest-custombuttons/Quests/QuestList-CustomPrompt.txt",
+        "Assets/Game/Mods/blb-quest-custombuttons/Quests/BLB00001.txt",
+        "Assets/Game/Mods/blb-quest-custombuttons/Scripts/CustomPrompt.cs"
+    ],
+    "Contributes": null,
+    "Dependencies": null
+}

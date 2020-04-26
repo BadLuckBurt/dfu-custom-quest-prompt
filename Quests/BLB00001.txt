@@ -1,0 +1,61 @@
+Quest: BLB00001
+DisplayName: Custom Dialog Button Test
+
+QRC: 
+
+QuestorOffer: [1000]
+<ce>I offer you do this quest to test custom dialog buttons
+<ce>Do you accept?
+
+RefuseQuest: [1001]
+<ce>That's too bad, now you won't get to see
+<ce>how awesome these custom buttons are
+
+AcceptQuest: [1002]
+<ce>Awesome! Time to show you
+<ce>how awesome these custom buttons are
+
+QuestFail: [1003]
+<ce>I didn't think it was possible
+<ce>but you totally managed to fail this quest
+
+QuestComplete: [1004]
+<ce>Amazing! You managed to complete the quest
+
+RumorsDuringQuest: [1005]
+<ce>Did you hear about the custom dialog buttons
+<ce>that can be used for quests now?
+
+Message: 1020
+%qdt:
+Someone has given me a quest
+that revolves around custom dialog buttons
+
+Message: 1030
+%qdt:
+I have found the custom buttons to be quite amazing
+
+Message: 1040
+<ce>You pressed button 1
+
+Message: 1050
+<ce>You pressed button 2
+
+QBN:
+-- Item _reward_ gold
+
+-- Person _questgiver_ group Questor male
+
+--	Quest start-up:
+	say 1020
+	customprompt 1000 BUTTON1 _task1_ BUTTON2 _task2_
+
+_task1_ task:
+	say 1040
+	say 1030
+	end quest saying 1005
+
+_task2_ task:
+	say 1050
+	say 1030
+	end quest saying 1004
