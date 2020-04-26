@@ -41,6 +41,9 @@ Message: 1040
 Message: 1050
 <ce>You pressed button 2
 
+Message: 1060
+<ce>You pressed button 3
+
 QBN:
 -- Item _reward_ gold
 
@@ -51,14 +54,22 @@ QBN:
 	-- customprompt (\d+)(?:\s([a-zA-Z0-9._]+\s[a-zA-Z0-9_.]+)){2,}
 	-- customprompt (?<id>\d+)(?:\s(?<buttons>[a-zA-Z0-9]+ [a-zA-Z0-9_.]+){2,})
 	-- customprompt (?<id>\d+)(?:\s(?<buttons>\w+\s\w+)){2,}
-	customprompt 1000 BUTTON1 _task1_ BUTTON2 _task2_
+	customprompt 1000 BUTTON1 _task1_ BUTTON2 _task2_ BUTTON3 _task3_
 
 _task1_ task:
 	say 1040
 	say 1030
-	end quest saying 1005
+	say 1004
+	end quest
 
 _task2_ task:
 	say 1050
 	say 1030
-	end quest saying 1004
+	say 1004
+	end quest
+
+_task3_ task:
+	say 1060
+	say 1030
+	say 1004
+	end quest

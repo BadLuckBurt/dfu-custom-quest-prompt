@@ -11,7 +11,10 @@
         "Assets/Game/Mods/blb-quest-custombuttons/blb-quest-custombuttons.dfmod.json",
         "Assets/Game/Mods/blb-quest-custombuttons/Quests/QuestList-CustomPrompt.txt",
         "Assets/Game/Mods/blb-quest-custombuttons/Quests/BLB00001.txt",
-        "Assets/Game/Mods/blb-quest-custombuttons/Scripts/CustomPrompt.cs"
+        "Assets/Game/Mods/blb-quest-custombuttons/Scripts/CustomPrompt.cs",
+        "Assets/Game/Mods/blb-quest-custombuttons/Textures/buttonBUTTON2.png",
+        "Assets/Game/Mods/blb-quest-custombuttons/Textures/buttonBUTTON1.png",
+        "Assets/Game/Mods/blb-quest-custombuttons/Textures/buttonBUTTON3.png"
     ],
     "Contributes": null,
     "Dependencies": null

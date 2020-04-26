@@ -26,12 +26,15 @@ namespace DaggerfallWorkshop.Game.Questing.Actions
         int id;
 
         Dictionary<string, Symbol> buttons = new Dictionary<string, Symbol>();
-        string[] buttonKeys = new string[]{};
+        string[] buttonKeys;
 
         public override string Pattern
         {
-            get { return @"customprompt (?<id>\d+)(?:\s(?<buttons>[a-zA-Z0-9._]+\s[a-zA-Z0-9_.]+)){2,}|" +
-                         @"customprompt (?<idName>\w+)(?:\s(?<buttons>[a-zA-Z0-9._]+\s[a-zA-Z0-9_.]+)){2,}"; }
+            //customprompt (?id\d+)(?<buttons>\s?[a-zA-Z0-9._]+\s[a-zA-Z0-9_.]+){2,}
+            //get { return @"customprompt (?id\d+)(?<buttons>\s?[a-zA-Z0-9._]+\s[a-zA-Z0-9_.]+){2,}|" +
+                         //@"customprompt (?idName\w+)(?<buttons>\s?[a-zA-Z0-9._]+\s[a-zA-Z0-9_.]+){2,}"; }
+            get { return @"customprompt (?<id>\d+)\s(?<buttons>[A-Za-z0-9_\s]+)|" + 
+                        @"customprompt (?<idName>\w+)\s(?<buttons>[A-Za-z0-9_\s]+)"; }
         }
 
         public CustomPrompt(Quest parentQuest)
@@ -50,13 +53,16 @@ namespace DaggerfallWorkshop.Game.Questing.Actions
             // Factory new prompt
             CustomPrompt prompt = new CustomPrompt(parentQuest);
             prompt.id = Parser.ParseInt(match.Groups["id"].Value);
-            Debug.Log(match.Groups["buttons"].ToString());
             string[] promptButtons = match.Groups["buttons"].Value.Split(' ');
-            Debug.Log(promptButtons.ToString());
+            prompt.buttonKeys = new string[promptButtons.Length / 2];
+            int j = 0;
             for(int i = 0; i < promptButtons.Length; i = i + 2) {
-                buttonKeys[i] = promptButtons[i];
-                buttons.Add(promptButtons[i], new Symbol(promptButtons[i + 1]));
+                Debug.Log("adding button: " + promptButtons[i]);
+                prompt.buttonKeys[j] = promptButtons[i];
+                prompt.buttons.Add(promptButtons[i], new Symbol(promptButtons[i + 1]));
+                j++;
             }
+            Debug.Log("Finished adding buttons");
 
             // Resolve static message back to ID
             string idName = match.Groups["idName"].Value;
@@ -74,12 +80,16 @@ namespace DaggerfallWorkshop.Game.Questing.Actions
             DaggerfallMessageBox messageBox = CreateCustomMessagePrompt(ParentQuest, id);
             if (messageBox != null)
             {
+                Debug.Log("Created messagebox");
+                Debug.Log("Adding buttons (" + buttonKeys.Length.ToString() + ")");
                 for(int i = 0; i < buttonKeys.Length; i++)
                 {
+                    Debug.Log("Creating button: " + buttonKeys[i]);
                     messageBox.AddCustomButton(id + i, buttonKeys[i], false);
                 }
-
+                Debug.Log("Adding click event");
                 messageBox.OnCustomButtonClick += MessageBox_OnCustomButtonClick;
+                Debug.Log("Showing messagebox");
                 messageBox.Show();
             }
             SetComplete();
@@ -119,6 +129,7 @@ namespace DaggerfallWorkshop.Game.Questing.Actions
             Symbol task;
             buttons.TryGetValue(messageBoxButton, out task);
             ParentQuest.StartTask(task);
+            sender.CloseWindow();
         }
 
         #region Serialization
