@@ -4,7 +4,7 @@ DisplayName: Custom Dialog Button Test
 QRC: 
 
 QuestorOffer: [1000]
-<ce>I offer you do this quest to test custom dialog buttons
+<ce>I offer you this quest to test custom dialog buttons
 <ce>Do you accept?
 
 RefuseQuest: [1001]
@@ -45,15 +45,11 @@ Message: 1060
 <ce>You pressed button 3
 
 QBN:
--- Item _reward_ gold
 
 -- Person _questgiver_ group Questor male
 
 --	Quest start-up:
 	say 1020
-	-- customprompt (\d+)(?:\s([a-zA-Z0-9._]+\s[a-zA-Z0-9_.]+)){2,}
-	-- customprompt (?<id>\d+)(?:\s(?<buttons>[a-zA-Z0-9]+ [a-zA-Z0-9_.]+){2,})
-	-- customprompt (?<id>\d+)(?:\s(?<buttons>\w+\s\w+)){2,}
 	customprompt 1000 BUTTON1 _task1_ BUTTON2 _task2_ BUTTON3 _task3_
 
 _task1_ task:

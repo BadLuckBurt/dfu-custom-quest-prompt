@@ -1,0 +1,94 @@
+Quest: BLB00002
+DisplayName: Custom Dialog Button Test 2
+-- Questor: Peasant
+
+QRC:
+
+QuestorOffer: [1000]
+<ce>Greetings %pcf, a %pct like you is just what I need
+<ce>I am in need of some information
+<ce>and I think you're the perfect person to acquire it for me
+<ce>
+<ce>Would you be interested in earning some gold?
+
+RefuseQuest: [1001]
+<ce>That's too bad, now you won't get to see
+<ce>how awesome these custom buttons are
+
+AcceptQuest: [1002]
+<ce>Awesome! Time to show you
+<ce>how awesome these custom buttons are
+
+QuestFail: [1003]
+<ce>I didn't think it was possible
+<ce>but you totally managed to fail this quest
+
+QuestComplete: [1004]
+<ce>Amazing! You managed to complete the quest
+
+RumorsDuringQuest: [1005]
+<ce>Did you hear about the custom dialog buttons
+<ce>that can be used for quests now?
+
+Message: 1010
+<ce>Dear %pcf, my name is _questor_ and I could use your assistance
+<ce>If you want to learn more, please come meet me.
+<ce>
+<ce>You can find me at __questor_ in ___questor_
+
+Message: 1020
+<ce>Great, I knew I could count on you.
+<ce>I know that _npc2_ has the information I need,
+<ce>you can find him at __npc2_ in ___npc2_
+<ce>
+<ce>You might need a little something to convince him to talk
+<ce>but I'm sure you can figure that out on your own.
+
+Message: 1030
+<ce>Well, _questor_ can claim that I am supposed to know
+<ce>but I promise you, I know nothing!
+
+QBN:
+
+-- Item _reward1_ gold
+-- Item _reward2_ gold 500 to 1000
+
+Person _questor_ group Resident2 male
+--Place _questorHouse_ local house1
+
+Person _npc2_ group Resident1 male
+--Place _npc2House_ remote house1
+
+--place npc _questor_ at _questorHouse_
+--place npc _npc2_ at _npc2House_
+
+variable _questStarted_
+
+say 1010
+
+_questorClicked_ task:
+    clicked npc _questor_
+
+_npcClicked_ task: 
+    clicked npc _npc2_
+
+_questStart_ task:
+    when _questorClicked_ and not _questStarted_
+    prompt 1000 yes _questAccepted_ no _questDeclined_
+
+_questAccepted_ task: 
+    setvar _questStarted_
+    say 1020
+
+_questDeclined_ task:
+    clear _questStarted_
+    end quest saying 1001
+
+_getInfo_ task:
+    when _questStarted_ and _npcClicked_
+    clear _questorClicked_
+    say 1030
+
+_questFinish_ task:
+    when _getInfo_ and _questorClicked_
+    end quest saying 1004

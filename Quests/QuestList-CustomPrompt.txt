@@ -9,4 +9,5 @@
 
 schema: *name, group, membership, minReq, flag, notes
 
-BLB00001, Commoners, N, 1, 0, Mountain Rumors
+BLB00001, Commoners, N, 1, 0, Custom Buttons Quest 1
+BLB00002, Commoners, N, 1, 0, Custom Buttons Quest 2
